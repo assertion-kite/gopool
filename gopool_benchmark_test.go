@@ -2,7 +2,6 @@ package gopool
 
 import (
 	"github.com/alitto/pond"
-	"github.com/daniel-hutao/spinlock"
 	"github.com/panjf2000/ants/v2"
 	"sync"
 	"testing"
@@ -34,7 +33,7 @@ func BenchmarkGoPool(b *testing.B) {
 }
 
 func BenchmarkGoPoolWithSpinLock(b *testing.B) {
-	pool := NewGoPool(PoolSize, WithLock(new(spinlock.SpinLock)))
+	pool := NewGoPool(PoolSize, WithLock(new(SpinLock)))
 	defer pool.Release()
 
 	taskFunc := func() (interface{}, error) {

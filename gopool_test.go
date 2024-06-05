@@ -2,12 +2,11 @@ package gopool_test
 
 import (
 	"errors"
-	"gopool"
+	"github.com/assertion-kite/gopool"
 	"sync"
 	"sync/atomic"
 	"time"
 
-	"github.com/daniel-hutao/spinlock"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )
@@ -29,7 +28,7 @@ var _ = Describe("Gopool", func() {
 
 	Describe("With SpinLock", func() {
 		It("should work correctly", func() {
-			pool := gopool.NewGoPool(100, gopool.WithLock(new(spinlock.SpinLock)))
+			pool := gopool.NewGoPool(100, gopool.WithLock(new(gopool.SpinLock)))
 			defer pool.Release()
 			for i := 0; i < 1000; i++ {
 				pool.AddTask(func() (interface{}, error) {
